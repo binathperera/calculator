@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+}
+
+#frame{
+    background-color: brown;
+    padding: 10px;
+    width: 300px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -230px 0 0 -150px 
+}
+#display-div{
+    height: 90pt;
+    background-color: white;
+}
+.grid-container{
+    display: flex;
+    flex-wrap: wrap;
+    height: 250pt;
+    background-color: white;
+    margin-top: 10px;
+    align-items: center;
+}
+.grid-item{
+    background-color: gainsboro;
+    flex: 1;
+    color: brown;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    line-height: 60px;
+    min-width: 60px;
+    min-height: 65px;
+    
+    border: 1px solid black;
+    
+}
+
