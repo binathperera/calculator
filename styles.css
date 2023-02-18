@@ -14,7 +14,10 @@ body{
 }
 #display-div{
     height: 90pt;
-    background-color: white;
+    background-color: rgb(169, 193, 169);
+    text-align: right;
+    
+    overflow: hidden;
 }
 .grid-container{
     display: flex;
@@ -37,5 +40,15 @@ body{
     
     border: 1px solid black;
     
+}
+#line1{
+    font-size: 24px;
+    min-height: 1lh;
+    overflow: auto;
+}
+#line2{
+    font-size: 40px;
+    min-height: 1lh;
+    overflow: auto;
 }
 
