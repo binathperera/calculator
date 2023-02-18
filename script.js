@@ -9,14 +9,12 @@ var operand2Specified=false;
 function clickEvent(e){
     var line1=document.getElementById('line1');
     var line2=document.getElementById('line2');
-    e.target.style.backgroundColor="white";
-    setTimeout(function(){e.target.style.backgroundColor="gainsboro";},150);
+    e.target.style.backgroundColor="rgb(33, 33, 33)";
+    setTimeout(function(){e.target.style.backgroundColor="rgb(52, 52, 52)";},150);
     var character=e.target.innerText;
     if('1234567890'.includes(character) && line2.innerText.length==10){
         return;
     }
-    if(character=='÷')character='/';
-    if(character=='×')character='*';
     if(character=='Del'){
         line2.innerText=line2.innerText.substring(0,line2.innerText.length-1);
         if(line2.innerText.length==0){
@@ -28,13 +26,13 @@ function clickEvent(e){
         }
         return;
     }
-    if('+-*/%'.includes(character) && !operand1Specified)return;
+    if('+-×÷%'.includes(character) && !operand1Specified)return;
     if(character=='%'){
         if(operand2Specified){
             operand2=line2.innerText;
             var result=doOperation();//////////////////
-            line1.innerText= result+'/100=';
-            operation="/"; //////////////
+            line1.innerText= result+'÷100=';
+            operation="÷"; //////////////
             operand2='100';
             result= doOperation();
             line1.innerText+=result;
@@ -42,8 +40,8 @@ function clickEvent(e){
             operand2Specified=false;
             line2.innerText= result;
         }else{
-            line1.innerText= line2.innerText+'/100=';
-            operation="/";
+            line1.innerText= line2.innerText+'÷100=';
+            operation="÷";
             operand2='100';
             var result=doOperation();//////////////////////
             line1.innerText+=result;
@@ -60,10 +58,12 @@ function clickEvent(e){
     }
     if(character=='=' && !operand2Specified)return;//Return if full expression is not entered yet
     if(character=='0' && line2.innerText=='0')return; //If 0 is entered when 0 is already there as first digit
-    if(line2.innerText=='0' && !'+-*/%.='.includes(character))line2.innerText='';//If first letter is 0 and any other digit except period(.) is entered in front
+    if(line2.innerText=='0' && !'+-×÷%.='.includes(character))line2.innerText='';//If first letter is 0 and any other digit except period(.) is entered in front
     if(character=='=' && operationSpecified && operand1Specified && operand2Specified){
+        let result=doOperation();///////////////////////
+        if(result==undefined)return;
         line1.innerText= line1.innerText+line2.innerText+'=';
-        line2.innerText= doOperation();///////////////////////
+        line2.innerText= result;
         operand1= line2.innerText;
         line1.innerText= line1.innerText+line2.innerText;
         operationSpecified=false;
@@ -78,8 +78,9 @@ function clickEvent(e){
         operand2Specified=false;
         return;
     }
-    if('+-*/-%'.includes(character) && operationSpecified && operand1Specified && operand2Specified){
-        var result=doOperation(); ///////////////////
+    if('+-×÷-%'.includes(character) && operationSpecified && operand1Specified && operand2Specified){
+        let result=doOperation(); ///////////////////
+        if(result==undefined)return;
         operand2Specified=false;
         operand1=result;
         line1.innerText= result+character;
@@ -88,14 +89,14 @@ function clickEvent(e){
         return;
     }
 
-    if('+-*/-%'.includes(character) && !operationSpecified){
+    if('+-×÷-%'.includes(character) && !operationSpecified){
         operationSpecified=true;
         operation=character; //////////////
         line1.innerText= line2.innerText+character;
         line2.innerText="";
         return; 
     }
-    if('+-*/-%'.includes(character) && operationSpecified){
+    if('+-×÷-%'.includes(character) && operationSpecified){
         var text=line1.innerText;
         line1.innerText= text.substring(0,text.length-1)+character; 
         operation=character;
@@ -120,10 +121,10 @@ function doOperation(){
     switch(operation){
         case '+': result= parseFloat(operand1) + parseFloat(operand2); break;
         case '-': result= parseFloat(operand1)-parseFloat(operand2); break;
-        case '*': result= parseFloat(operand1)*parseFloat(operand2); break;
-        case '/':{
+        case '×': result= parseFloat(operand1)*parseFloat(operand2); break;
+        case '÷':{
                         if(operand2==0){
-                            result= "undefined";
+                            window.alert("Cannot divide by zero!");
                         }else{
                             result= parseFloat(operand1)/parseFloat(operand2);
                         }
