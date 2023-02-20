@@ -12,7 +12,7 @@ function clickEvent(e){
     e.target.style.backgroundColor="rgb(33, 33, 33)";
     setTimeout(function(){e.target.style.backgroundColor="rgb(52, 52, 52)";},150);
     var character=e.target.innerText;
-    if('1234567890'.includes(character) && line2.innerText.length==10){
+    if('1234567890.'.includes(character) && line2.innerText.length>=10){
         window.alert("Can't enter more than 10 digits");
         return;
     }
