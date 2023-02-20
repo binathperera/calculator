@@ -40,6 +40,7 @@ function clickEvent(e){
             operationSpecified=false;
             operand2Specified=false;
             line2.innerText= result;
+            operand1=result;
         }else{
             line1.innerText= line2.innerText+'÷100=';
             operation="÷";
@@ -49,6 +50,7 @@ function clickEvent(e){
             operationSpecified=false;
             operand2Specified=false;
             line2.innerText= result;
+            operand1=result;
         }
         return;
     }
