@@ -1,5 +1,5 @@
 body{
-    margin: 0;
+    margin: 0; 
     height: 100vh;
     background: linear-gradient(299deg, rgba(3,94,97,1) 0%, rgba(101,255,229,1) 100%);
 }
@@ -11,20 +11,20 @@ body{
     left: 50%;
     margin: -230px 0 0 -150px 
 }
+
 #display-div{
-    height: 90pt;
     background-color: rgb(43, 41, 42);
     text-align: right;
-    overflow: hidden;
 }
     
 .grid-container{
     display: grid;
-    grid-template: auto auto auto auto auto / auto auto auto auto;
-    /* height: 250pt; */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(5, minmax(0, 1fr));
     background-color: rgb(33, 33, 33);
     align-items: center;
 }
+
 .grid-item{
     background-color: #343434;
     color:rgb(229, 229, 229);
@@ -36,21 +36,25 @@ body{
     margin: 5px;
     border-radius: 5px;
 }
+
 .operator{
     background: linear-gradient(299deg, rgba(26,54,66,1) 17%, rgba(34,69,75,1) 100%);
 }
+
 #line1{
     font-size: 24px;
-    min-height: 1lh;
+    min-height: 2lh;
     overflow: auto;
     color: rgb(229, 227, 228);
 }
+
 #line2{
     font-size: 40px;
     min-height: 1lh;
     overflow: auto;
     color: rgb(251, 249, 250);;
 }
+
 #c{
     grid-column: 1 / span 2;
 }

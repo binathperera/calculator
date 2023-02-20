@@ -13,6 +13,7 @@ function clickEvent(e){
     setTimeout(function(){e.target.style.backgroundColor="rgb(52, 52, 52)";},150);
     var character=e.target.innerText;
     if('1234567890'.includes(character) && line2.innerText.length==10){
+        window.alert("Can't enter more than 10 digits");
         return;
     }
     if(character=='Del'){
@@ -30,9 +31,9 @@ function clickEvent(e){
     if(character=='%'){
         if(operand2Specified){
             operand2=line2.innerText;
-            var result=doOperation();//////////////////
+            var result=doOperation();
             line1.innerText= result+'÷100=';
-            operation="÷"; //////////////
+            operation="÷";
             operand2='100';
             result= doOperation();
             line1.innerText+=result;
@@ -43,7 +44,7 @@ function clickEvent(e){
             line1.innerText= line2.innerText+'÷100=';
             operation="÷";
             operand2='100';
-            var result=doOperation();//////////////////////
+            var result=doOperation();
             line1.innerText+=result;
             operationSpecified=false;
             operand2Specified=false;
@@ -56,11 +57,11 @@ function clickEvent(e){
         line2.innerText='0.';
         return;
     }
-    if(character=='=' && !operand2Specified)return;//Return if full expression is not entered yet
-    if(character=='0' && line2.innerText=='0')return; //If 0 is entered when 0 is already there as first digit
-    if(line2.innerText=='0' && !'+-×÷%.='.includes(character))line2.innerText='';//If first letter is 0 and any other digit except period(.) is entered in front
+    if(character=='=' && !operand2Specified)return;
+    if(character=='0' && line2.innerText=='0')return;
+    if(line2.innerText=='0' && !'+-×÷%.='.includes(character))line2.innerText='';
     if(character=='=' && operationSpecified && operand1Specified && operand2Specified){
-        let result=doOperation();///////////////////////
+        let result=doOperation();
         if(result==undefined)return;
         line1.innerText= line1.innerText+line2.innerText+'=';
         line2.innerText= result;
@@ -79,7 +80,7 @@ function clickEvent(e){
         return;
     }
     if('+-×÷-%'.includes(character) && operationSpecified && operand1Specified && operand2Specified){
-        let result=doOperation(); ///////////////////
+        let result=doOperation();
         if(result==undefined)return;
         operand2Specified=false;
         operand1=result;
@@ -91,7 +92,7 @@ function clickEvent(e){
 
     if('+-×÷-%'.includes(character) && !operationSpecified){
         operationSpecified=true;
-        operation=character; //////////////
+        operation=character;
         line1.innerText= line2.innerText+character;
         line2.innerText="";
         return; 
@@ -107,11 +108,11 @@ function clickEvent(e){
         operand2=line2.innerText;
     }else if(operationSpecified && !operand2Specified){
         line2.innerText= character;
-        operand2=line2.innerText; /////////////
+        operand2=line2.innerText;
         operand2Specified=true;
     }else{
         line2.innerText= line2.innerText+character;
-        operand1=line2.innerText; ///////////////
+        operand1=line2.innerText;
         operand1Specified=true;
     }
 }
@@ -119,16 +120,19 @@ function doOperation(){
     let result;
     console.log(parseFloat(operand1).toFixed(2)+' '+operation+' '+parseFloat(operand2).toFixed(2));
     switch(operation){
-        case '+': result= parseFloat(operand1) + parseFloat(operand2); break;
-        case '-': result= parseFloat(operand1)-parseFloat(operand2); break;
-        case '×': result= parseFloat(operand1)*parseFloat(operand2); break;
+        case '+': result= round(parseFloat(operand1) + parseFloat(operand2)); break;
+        case '-': result= round(parseFloat(operand1)-parseFloat(operand2)); break;
+        case '×': result= round(parseFloat(operand1)*parseFloat(operand2)); break;
         case '÷':{
                         if(operand2==0){
                             window.alert("Cannot divide by zero!");
                         }else{
-                            result= parseFloat(operand1)/parseFloat(operand2);
+                            result= round(parseFloat(operand1)/parseFloat(operand2));
                         }
                 } break;
     }
     return result;
+}
+function round(val){
+    return Math.round(val*10000)/10000;
 }
