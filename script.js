@@ -32,7 +32,7 @@ function clickEvent(e){
         if(operand2Specified){
             operand2=line2.innerText;
             var result=doOperation();
-            line1.innerText= result+'÷100=';
+            line1.innerText= result+'÷100 =';
             operation="÷";
             operand2='100';
             result= doOperation();
@@ -42,7 +42,7 @@ function clickEvent(e){
             line2.innerText= result;
             operand1=result;
         }else{
-            line1.innerText= line2.innerText+'÷100=';
+            line1.innerText= line2.innerText+'÷100 =';
             operation="÷";
             operand2='100';
             var result=doOperation();
@@ -65,7 +65,7 @@ function clickEvent(e){
     if(character=='=' && operationSpecified && operand1Specified && operand2Specified){
         let result=doOperation();
         if(result==undefined)return;
-        line1.innerText= line1.innerText+line2.innerText+'=';
+        line1.innerText= line1.innerText+line2.innerText+' =';
         line2.innerText= result;
         operand1= line2.innerText;
         line1.innerText= line1.innerText+line2.innerText;
